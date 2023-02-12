@@ -47,7 +47,7 @@ public class WalletResource {
             return new ResponseEntity<>(walletDtoList, HttpStatus.OK);
     }
     @PutMapping(path = "/wallet")
-    public ResponseEntity<ResponseDTO<Boolean>> update(@RequestBody @NotNull @NotEmpty String reference,@NotNull @NotEmpty Double sold){
+    public ResponseEntity<ResponseDTO<Boolean>> update(@RequestParam @NotNull @NotEmpty String reference,@RequestParam @NotNull @NotEmpty Double sold){
         Wallet wallet = walletService.updateWallet(reference,sold);
         ResponseDTO<Boolean> response= new ResponseDTO<>();
         response.setStatus("SUCCESS");
