@@ -1,6 +1,7 @@
 package org.roronoa.banklywallet.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
@@ -21,7 +22,7 @@ public class Wallet {
     @NotEmpty
     @Column(nullable = false,unique = true)
     private String reference;
-    @NotNull @NotEmpty
+    @NotNull @NotEmpty @Email
     @Column(nullable = false)
     private String owner;
     private Double sold;

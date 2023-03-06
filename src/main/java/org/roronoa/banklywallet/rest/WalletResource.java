@@ -14,6 +14,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
@@ -23,9 +24,10 @@ import java.util.stream.Collectors;
 public class WalletResource {
     private final IWalletService walletService;
     @PostMapping(path = "/wallet")
-    public ResponseEntity<WalletDto> saveWallet(@RequestBody WalletDto walletDto){
+    public ResponseEntity<WalletDto> saveWallet(@RequestHeader Map<String, String> headers,@RequestBody WalletDto walletDto){
+        String token = headers.get("authorization");
         Wallet wallet = EntityUtils.walletDTOToWallet(walletDto);
-        wallet = walletService.saveWallet(wallet);
+        wallet = walletService.saveWallet(token,wallet);
         return new ResponseEntity<>(EntityUtils.walletToWalletDTO(wallet), HttpStatus.OK);
     }
     @GetMapping(path = "/wallet/{reference}")
